@@ -1,10 +1,9 @@
-import 'package:sort_algorithm/quick_sort.dart';
-import 'package:sort_algorithm/sort_algorithm.dart' as sort_algorithm;
+import 'package:sort_algorithm/bubble_sort.dart';
 
 void main(List<String> arguments) {
   final listToSort = [10, 5, 12, 2, 56, 42, 12, 0];
 
-  final newList = quickSort(listToSort);
+  final newList = bubbleSort(listToSort);
 
   print(newList);
 }
