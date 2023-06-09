@@ -1,39 +1,40 @@
 import 'dart:math';
 
-List<int> quickSort(List<int> list, int left, int right) {
+List<int> quickSort(List<int> values, int left, int right) {
   if (left < right) {
-    final indexPivot = partition(list, left, right);
-    quickSort(list, left, indexPivot - 1);
-    quickSort(list, indexPivot + 1, right);
+    final indexPivot = partition(values, left, right);
+    quickSort(values, left, indexPivot - 1);
+    quickSort(values, indexPivot + 1, right);
   }
-  return list;
+  return values;
 }
 
-int partition(List<int> list, int left, int right) {
+int partition(List<int> values, int left, int right) {
+  // get a random pivot index
   final pivotRange = right - left + 1;
   final randomPivot = Random().nextDouble().toInt() * pivotRange + left;
 
   // change the random valor chosen with first position
-  swap(list, left, randomPivot);
+  swap(values, left, randomPivot);
 
-  int pivot = list[left];
+  int pivot = values[left];
   int i = left;
 
   for (int j = i + 1; j <= right; j++) {
-    if (list[j] <= pivot) {
+    if (values[j] <= pivot) {
       i++;
-      swap(list, i, j);
+      swap(values, i, j);
     }
   }
 
-  swap(list, left, i);
+  swap(values, left, i);
 
   return i;
 }
 
-List<int> swap(List<int> list, int left, right) {
-  final temp = list[left];
-  list[left] = list[right];
-  list[right] = temp;
-  return list;
+List<int> swap(List<int> values, int left, right) {
+  final temp = values[left];
+  values[left] = values[right];
+  values[right] = temp;
+  return values;
 }

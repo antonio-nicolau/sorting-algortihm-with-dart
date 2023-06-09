@@ -1,30 +1,33 @@
-List<int> mergeSort(List<int> list, int left, int right) {
+List<int> mergeSort(List<int> values, int left, int right) {
   if (left >= right) {
-    return list;
+    return values;
   } else {
     int middle = (left + right) ~/ 2;
-    mergeSort(list, left, middle);
-    mergeSort(list, middle + 1, right);
 
-    merge(list, left, middle, right);
+    // Sort first and second halves
+    mergeSort(values, left, middle);
+    mergeSort(values, middle + 1, right);
+
+    merge(values, left, middle, right);
   }
 
-  return list;
+  return values;
 }
 
-void merge(List<int> list, int left, int middle, int right) {
-  final helper = List.generate(list.length, (index) => list[index]);
+void merge(List<int> values, int left, int middle, int right) {
+  // create a temporary Array with elements of [values]
+  final tempArray = List.generate(values.length, (index) => values[index]);
 
   int i = left;
   int j = middle + 1;
   int k = left;
 
   while (i <= middle && j <= right) {
-    if (helper[i] <= helper[j]) {
-      list[k] = helper[i];
+    if (tempArray[i] <= tempArray[j]) {
+      values[k] = tempArray[i];
       i++;
     } else {
-      list[k] = helper[j];
+      values[k] = tempArray[j];
       j++;
     }
     k++;
@@ -32,14 +35,14 @@ void merge(List<int> list, int left, int middle, int right) {
 
   // if did not consume initial part, append
   while (i <= middle) {
-    list[k] = helper[i];
+    values[k] = tempArray[i];
     i++;
     k++;
   }
 
   // if did not consume last part, append
   while (j <= right) {
-    list[k] = helper[j];
+    values[k] = tempArray[j];
     j++;
     k++;
   }
